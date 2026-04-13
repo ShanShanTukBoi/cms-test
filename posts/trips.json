@@ -1,5 +1,5 @@
 {
-  "title": "Europe 2024",  
+  "title": "Europe 2024",
   "locations": [
     {
       "name": "Melbourne",
@@ -105,6 +105,20 @@
             "https://i.imgur.com/YOZWM8X.jpg",
             "https://i.imgur.com/EjLNVWs.jpg",
             "https://i.imgur.com/QQXc6hB.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Madrid, Spain",
+      "lat": 40,
+      "lng": -3,
+      "posts": [
+        {
+          "title": "Retiro",
+          "text": "Boat with Jonah",
+          "photos": [
+            "https://imgur.com/vFdYDMB"
           ]
         }
       ]
