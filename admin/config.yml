@@ -1,7 +1,9 @@
 backend:
   name: git-gateway
   branch: main
-  identity_url: https://cms-test-ryt.netlify.app
+
+site_url: https://cms-test-ryt.netlify.app
+identity_url: https://cms-test-ryt.netlify.app
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
