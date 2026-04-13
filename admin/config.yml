@@ -22,17 +22,17 @@ collections:
             widget: "list"
             fields:
               - { label: "Name", name: "name", widget: "string" }
-              - { label: "Lat", name: "lat", widget: "number" }
-              - { label: "Lng", name: "lng", widget: "number" }
+              - { label: "Lat", name: "lat", widget: "number", value_type: "float" }
+              - { label: "Lng", name: "lng", widget: "number", value_type: "float" }
 
               - label: "Posts"
                 name: "posts"
                 widget: "list"
                 fields:
                   - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Text", name: "text", widget: "text" }
+                  - { label: "Text", name: "text", widget: "text", required: false }
                   - label: "Photos"
                     name: "photos"
                     widget: "list"
                     field:
-                      { label: "Photo URL", name: "photo", widget: "string" }
+                      { label: "Photo URL", name: "photo", widget: "string", required: false }
