@@ -93,6 +93,20 @@
       ]
     },
     {
+      "name": "Madrid, Spain",
+      "lat": 40.4167,
+      "lng": 3.7033,
+      "posts": [
+        {
+          "title": "Retiro",
+          "text": "Boat with Jonah",
+          "photos": [
+            "https://imgur.com/vFdYDMB.jpeg"
+          ]
+        }
+      ]
+    },
+    {
       "name": "Granada, Spain",
       "lat": 37.1825,
       "lng": -3.6012,
@@ -105,20 +119,6 @@
             "https://i.imgur.com/YOZWM8X.jpg",
             "https://i.imgur.com/EjLNVWs.jpg",
             "https://i.imgur.com/QQXc6hB.jpg"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Madrid, Spain",
-      "lat": 40,
-      "lng": -3,
-      "posts": [
-        {
-          "title": "Retiro",
-          "text": "Boat with Jonah",
-          "photos": [
-            "https://imgur.com/vFdYDMB"
           ]
         }
       ]
