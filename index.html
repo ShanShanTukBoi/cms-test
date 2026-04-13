@@ -1,26 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Travel Blog</title>
+  <meta charset="UTF-8" />
+  <title>Travel Posts</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+    .location {
+      margin-top: 40px;
+    }
+    .post {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .photos img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
-  <h1>My Travel Blog</h1>
-  <div id="posts"></div>
+
+  <h1>Travel Posts</h1>
+  <div id="app"></div>
 
   <script>
-    async function loadPosts() {
-      const res = await fetch('posts/hello-world.md');
-      const text = await res.text();
+    async function loadData() {
+      const res = await fetch('/posts/trips.json');
+      const data = await res.json();
 
-      document.getElementById('posts').innerHTML = `
-        <h2>Hello World</h2>
-        <pre>${text}</pre>
-      `;
+      const app = document.getElementById('app');
+
+      data.locations.forEach(location => {
+        if (!location.posts || location.posts.length === 0) return;
+
+        const locationEl = document.createElement('div');
+        locationEl.className = 'location';
+
+        locationEl.innerHTML = `
+          <h2>${location.name}</h2>
+          <p>Lat: ${location.lat}, Lng: ${location.lng}</p>
+        `;
+
+        location.posts.forEach(post => {
+          const postEl = document.createElement('div');
+          postEl.className = 'post';
+
+          let photosHTML = '';
+          if (post.photos && post.photos.length) {
+            photosHTML = `
+              <div class="photos">
+                ${post.photos.map(url => `<img src="${url}" />`).join('')}
+              </div>
+            `;
+          }
+
+          postEl.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.text || ''}</p>
+            ${photosHTML}
+          `;
+
+          locationEl.appendChild(postEl);
+        });
+
+        app.appendChild(locationEl);
+      });
     }
 
-    loadPosts();
+    loadData();
   </script>
   <script>
     if (window.netlifyIdentity) {
