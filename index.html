@@ -34,7 +34,7 @@
 
   <script>
     async function loadData() {
-      const res = await fetch('/posts/trips.json');
+      const res = await fetch('./posts/trips.json');
       const data = await res.json();
 
       const app = document.getElementById('app');
