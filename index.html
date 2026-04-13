@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Travel Blog</title>
+</head>
+<body>
+  <h1>My Travel Blog</h1>
+  <div id="posts"></div>
+
+  <script>
+    async function loadPosts() {
+      const res = await fetch('posts/hello-world.md');
+      const text = await res.text();
+
+      document.getElementById('posts').innerHTML = `
+        <h2>Hello World</h2>
+        <pre>${text}</pre>
+      `;
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
