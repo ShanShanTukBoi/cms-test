@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Travel Posts</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -78,16 +77,6 @@
 
     loadData();
   </script>
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
   </script>
 </body>
 </html>
