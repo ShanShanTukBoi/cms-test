@@ -2,6 +2,6 @@
   "name": "cms-test-oauth",
   "private": true,
   "dependencies": {
-    "netlify-cms-oauth-provider": "^1.3.0"
+    "@decap-cms/oauth-provider-node": "^1.0.0"
   }
 }
