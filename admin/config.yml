@@ -1,9 +1,11 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: shanshantukboi/cms-test
   branch: main
+  base_url: https://cms-test-ryt.netlify.app
+  auth_endpoint: /api/auth
 
-site_url: https://cms-test-ryt.netlify.app
-identity_url: https://cms-test-ryt.netlify.app
+site_url: https://shanshantukboi.github.io
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
