@@ -11,8 +11,11 @@
       margin: 40px auto;
       line-height: 1.6;
     }
+    .trip {
+      margin-top: 50px;
+    }
     .location {
-      margin-top: 40px;
+      margin-top: 30px;
     }
     .post {
       margin-top: 20px;
@@ -25,6 +28,9 @@
       margin-top: 10px;
       border-radius: 6px;
     }
+    .comments {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -33,51 +39,83 @@
   <div id="app"></div>
 
   <script>
+    const REPO = "ShanShanTukBoi/cms-test";
+
+    function createUtterancesElement(issueNumber) {
+      const script = document.createElement("script");
+      script.src = "https://utteranc.es/client.js";
+      script.setAttribute("repo", REPO);
+      script.setAttribute("issue-number", issueNumber);
+      script.setAttribute("theme", "github-light");
+      script.setAttribute("crossorigin", "anonymous");
+      script.async = true;
+      return script;
+    }
+
     async function loadData() {
-      const res = await fetch('./posts/trips.json');
+      const res = await fetch('./data/trips.json');
       const data = await res.json();
 
       const app = document.getElementById('app');
 
-      data.locations.forEach(location => {
-        if (!location.posts || location.posts.length === 0) return;
+      data.forEach(trip => {
+        const tripEl = document.createElement('div');
+        tripEl.className = 'trip';
 
-        const locationEl = document.createElement('div');
-        locationEl.className = 'location';
+        tripEl.innerHTML = `<h1>${trip.title}</h1>`;
 
-        locationEl.innerHTML = `
-          <h2>${location.name}</h2>
-          <p>Lat: ${location.lat}, Lng: ${location.lng}</p>
-        `;
+        trip.locations.forEach(location => {
+          if (!location.posts || location.posts.length === 0) return;
 
-        location.posts.forEach(post => {
-          const postEl = document.createElement('div');
-          postEl.className = 'post';
+          const locationEl = document.createElement('div');
+          locationEl.className = 'location';
 
-          let photosHTML = '';
-          if (post.photos && post.photos.length) {
-            photosHTML = `
-              <div class="photos">
-                ${post.photos.map(url => `<img src="${url}" />`).join('')}
-              </div>
-            `;
-          }
-
-          postEl.innerHTML = `
-            <h3>${post.title}</h3>
-            <p>${post.text || ''}</p>
-            ${photosHTML}
+          locationEl.innerHTML = `
+            <h2>${location.name}</h2>
+            <p>Lat: ${location.lat}, Lng: ${location.lng}</p>
           `;
 
-          locationEl.appendChild(postEl);
+          location.posts.forEach(post => {
+            const postEl = document.createElement('div');
+            postEl.className = 'post';
+
+            let photosHTML = '';
+            if (post.photos && post.photos.length) {
+              photosHTML = `
+                <div class="photos">
+                  ${post.photos.map(url => `<img src="${url}" />`).join('')}
+                </div>
+              `;
+            }
+
+            postEl.innerHTML = `
+              <h3>${post.title}</h3>
+              <p>${post.text || ''}</p>
+              ${photosHTML}
+            `;
+
+            // 👉 Comments container
+            const commentsEl = document.createElement('div');
+            commentsEl.className = 'comments';
+
+            // 👉 Load Utterances for this post
+            const utterancesScript = createUtterancesElement(post.id);
+            commentsEl.appendChild(utterancesScript);
+
+            postEl.appendChild(commentsEl);
+            locationEl.appendChild(postEl);
+          });
+
+          tripEl.appendChild(locationEl);
         });
 
-        app.appendChild(locationEl);
+        app.appendChild(tripEl);
       });
     }
 
     loadData();
   </script>
+
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
@@ -89,5 +127,6 @@
       });
     }
   </script>
+
 </body>
 </html>
