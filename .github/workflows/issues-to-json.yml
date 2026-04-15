@@ -1,0 +1,35 @@
+name: Issues to JSON (Python)
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run parser script
+        run: python scripts/issue_to_json.py
+
+      - name: Build trips index
+        run: python scripts/build_trips_index.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/posts
+          git commit -m "Update post from issue #${{ github.event.issue.number }}" || echo "No changes"
+          git push
