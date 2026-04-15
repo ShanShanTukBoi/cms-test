@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11"
 
       - name: Run parser script
-        run: python scripts/issue_to_json.py
+        run: python scripts/issues_to_json.py
 
       - name: Build trips index
         run: python scripts/build_trips_index.py
