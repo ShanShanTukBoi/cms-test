@@ -1,7 +1,8 @@
 name: Post
 description: Add or edit a post
 title: "[POST] "
-labels: ["post"]
+labels:
+  - post
 body:
   - type: input
     id: trip
